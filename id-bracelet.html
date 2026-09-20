@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ID Bracelet Audit</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-audit="idBracelet">
+  <main class="app-shell">
+    <nav class="topbar">
+      <a href="index.html" class="back-link">← Audit Hub</a>
+      <span class="save-state" id="saveState">Draft saved locally</span>
+    </nav>
+
+    <section class="card audit-header">
+      <div>
+        <p class="eyebrow">Routine ward audit</p>
+        <h1 id="auditTitle">ID Bracelet Audit</h1>
+        <p id="auditDescription" class="subtle"></p>
+      </div>
+      <div class="privacy-note compact"><strong>No patient identifiers.</strong> Use only bed/case references.</div>
+    </section>
+
+    <section class="card metadata-card">
+      <h2>Audit details</h2>
+      <div class="form-grid metadata-grid">
+        <label>Ward / area<input id="ward" autocomplete="off" placeholder="e.g. MW5"></label>
+        <label>Audit date<input id="auditDate" type="date"></label>
+        <label>Observer<input id="observer" autocomplete="off" placeholder="Name or initials"></label>
+        <label>Target compliance (%)<input id="target" type="number" min="1" max="100" step="1" value="95"></label>
+      </div>
+    </section>
+
+    <section class="card entry-card">
+      <div class="section-heading">
+        <div>
+          <h2>Add case</h2>
+          <p id="optionNote" class="subtle"></p>
+        </div>
+        <button id="clearEntry" class="button secondary" type="button">Clear entry</button>
+      </div>
+      <div class="form-grid case-meta">
+        <label>Case / bed reference<input id="caseRef" autocomplete="off" placeholder="e.g. Bed 12"></label>
+      </div>
+      <form id="auditForm"></form>
+      <label class="comments-label">Comments (optional)<textarea id="comments" rows="3" placeholder="No patient-identifiable information"></textarea></label>
+      <div class="action-row">
+        <button id="addCase" class="button primary" type="button">Add case</button>
+      </div>
+    </section>
+
+    <section class="summary-grid" aria-label="Audit summary">
+      <article class="metric card"><span>Cases</span><strong id="caseCount">0</strong></article>
+      <article class="metric card"><span>Applicable checks</span><strong id="applicableCount">0</strong></article>
+      <article class="metric card"><span>Compliant</span><strong id="passCount">0</strong></article>
+      <article class="metric card"><span>Overall compliance</span><strong id="overallCompliance">—</strong></article>
+    </section>
+
+    <section class="card results-card">
+      <div class="section-heading">
+        <div>
+          <h2>Live results</h2>
+          <p class="subtle">N/A / NR responses and unscored contextual questions are excluded from the compliance denominator.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="resultsTable">
+          <thead><tr><th>Section</th><th>Criterion</th><th>Pass</th><th>Fail</th><th>N/A</th><th>Applicable</th><th>Compliance</th><th>Target</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card cases-card">
+      <div class="section-heading">
+        <div><h2>Recorded cases</h2><p class="subtle">Edit or remove a case before exporting if needed.</p></div>
+        <div class="button-group">
+          <button id="exportCsv" class="button primary" type="button">Export CSV</button>
+          <button id="printPage" class="button secondary" type="button">Print results</button>
+          <button id="resetAudit" class="button danger" type="button">Reset audit</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="casesTable"><thead></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <footer>Draft data stays in this browser's local storage until you reset this audit.</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
